@@ -22,11 +22,27 @@ with open(SALES_FILE, "r") as f:
 
 print(" ")
 print("--- Exercise 3: Skip the Header ---")
-
+with open(SALES_FILE, "r") as f:
+    reader = csv.reader(f)
+    header = next(reader) # next() returns the next item from the iterator, which is the header row in this
+    print(f"Header: {header}")
+    for row in reader:
+        print(row)
 
 print(" ")
 print("--- Exercise 4: Compute Totals ---")
-
+total_revenue = 0
+with open(SALES_FILE, "r") as f:
+    reader = csv.reader(f)
+    next(reader)
+    for row in reader:
+        product, price_str, qty_str = row
+        price = float(price_str)
+        quantity = int(qty_str)
+        total = price * quantity
+        total_revenue += total
+        print(f"{product}: {quantity} units x ${price:.2f} = ${total:.2f}")
+print(f"Total revenue: ${total_revenue:.2f}")
 
 print(" ")
 print("--- Exercise 5: Filter and Write ---")
@@ -34,7 +50,16 @@ print("--- Exercise 5: Filter and Write ---")
 
 print(" ")
 print("--- Exercise 6: csv.DictReader ---")
-
+dict_total = 0
+with open(SALES_FILE, "r") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        price = float(row["price"])
+        quantity = int(row["quantity"])
+        total = price * quantity
+        dict_total += total
+        print(f"{row['product']}: {quantity} units x ${price:.2f} = ${total:.2f}")
+print(f"Total Revenue: ${dict_total:.2f}")
 
 print(" ")
 print("--- Exercise 7: Sales Summary by Product ---")
