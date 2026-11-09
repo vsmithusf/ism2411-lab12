@@ -96,8 +96,21 @@ for product in sorted(summary):
 
 print(" ")
 print("--- Exercise 8: Append Mode Log ---")
+timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+with open(LOG_FILE, "a") as f:
+    f.write(f"{timestamp} total revenue: ${total_revenue:.2f}\n")
 
+entries = 0
+with open(LOG_FILE, "r") as f:
+    for line in f:
+        entries += 1
+        print(line.strip())
 
-
-# Reflection 1:
-# Reflection 2:
+print(f"Log entries so far: {entries}")
+# Reflection 1: Python allows you to quickly and efficiently read and add values from a list together, while providing you flexibility
+# to add additional fields with ease, something that Excel doesn't allow you to do as easily. Python also allows you to count timestamps,
+# which is something Excel is not capable of doing. However, Excel is easier to read and provides many more options than Python does
+# regarding readability of a dataset, while still allowing you to perform calculations across an entire dataset like Python.
+# Reflection 2: Logging when an employee enters a dataset to add values is a great example of when an append-mode log file would be
+# useful, and it is useful here because it allows you to add an unlimited amount of values to a list or dictionary with dedicated
+# timestamps through the datatime function.
